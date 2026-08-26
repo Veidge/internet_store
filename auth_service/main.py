@@ -2,8 +2,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Annotated, List, Optional
 from fastapi import FastAPI, HTTPException, Depends, status, UploadFile, File, Form  # , Path
 from pydantic import BaseModel
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey, DateTime, LargeBinary, select, \
-    delete  # , insert, update, all
+from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey, DateTime, LargeBinary, select, delete  # , insert, update, all
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.exc import IntegrityError
