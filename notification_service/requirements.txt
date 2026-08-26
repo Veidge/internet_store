@@ -1,2 +1,2 @@
-aio-pika
-python-dotenv
+aio-pika==9.5.5
+python-dotenv==1.1.0

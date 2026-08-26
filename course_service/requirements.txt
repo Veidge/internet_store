@@ -1,4 +1,3 @@
-aio-pika
-sqlalchemy
-pydantic
-python-dotenv
+aio-pika==9.5.5
+sqlalchemy==2.0.41
+python-dotenv==1.1.0

@@ -1,7 +1,8 @@
-fastapi
-uvicorn[standard]
-python-jose[cryptography]
-passlib[bcrypt]
-pydantic
-python-dotenv
-aio-pika
+fastapi==0.115.13
+uvicorn[standard]==0.34.3
+pydantic==2.11.7
+python-jose[cryptography]==3.4.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.20
+python-dotenv==1.1.0
+aio-pika==9.5.5
