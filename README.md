@@ -6,24 +6,24 @@
 
 ## Сервисы
 
-| Сервис                 | Назначение                            |
-|------------------------|---------------------------------------|
-| `auth_service`         | Авторизация и токены                  |
-| `user_service`         | CRUD по пользователю                  |
-| `product_service`      | Работа с товарами                     |
-| `order_service`        | Оформление заказов                    |
-| `basket_service`       | Корзина                               |
-| `search_service`       | Поиск по товарам                      |
-| `admin_service`        | Панель управления                     |
-| `notification_service` | Email-уведомления через RabbitMQ      |
-| `course_service`       | Пример RPC-сервиса: получение курсов |
-| `gateway`              | Точка входа для всех HTTP-запросов   |
+| Сервис             | Назначение                       |
+|--------------------|----------------------------------|
+| `auth_service`     | Авторизация и токены             |
+| `user_service`     | CRUD по пользователю             |
+| `product_service`  | Работа с товарами                |
+| `order_service`    | Оформление заказов (GigaOrder)   |
+| `basket_service`   | Корзина                          |
+| `search_service`   | Поиск по товарам                 |
+| `admin_service`    | Панель управления                |
+| `notification_service` | Email-уведомления (RabbitMQ) |
+| `course_service`   | RPC-сервис с курсами (пример)    |
+| `gateway`          | Точка входа для всех запросов    |
 
 ---
 
 ## Запуск проекта
 
-> Требуется установленный Docker и Docker Compose
+> Убедитесь, что установлен Docker и Docker Compose.
 
 ```bash
 docker-compose up --build
@@ -39,7 +39,9 @@ docker-compose up --build
 
 ---
 
-## Примеры вызовов
+## Тесты и вызовы
+
+Примеры RPC-запросов через `gateway`:
 
 ```bash
 # Получение данных текущего пользователя (если токен действителен)
@@ -57,25 +59,12 @@ curl -X POST http://localhost:8000/api/orders/add   -H "Content-Type: applicatio
 
 ---
 
-## Переменные окружения
-
-Файл `.env` содержит:
-
-```
-RABBITMQ_URL=amqp://user3:password3@rabbitmq:5672/vhost_user3
-```
-
-Убедитесь, что все сервисы используют эту переменную для подключения к RabbitMQ.
-
----
-
 ## Разработка
 
 - Python 3.10+
 - FastAPI
-- RabbitMQ (через `aio_pika`)
+- RabbitMQ (`aio_pika`)
 - SQLite (локально)
-- Взаимодействие сервисов через очереди (RPC и events)
 
 ---
 
