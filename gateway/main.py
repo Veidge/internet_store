@@ -15,20 +15,20 @@ templates = Jinja2Templates(directory="templates")
 
 RABBIT_URL = os.getenv("RABBITMQ_URL")
 
-#@app.on_event("startup")
-#async def startup():
-#    app.state.connection = await aio_pika.connect_robust(RABBIT_URL)
-#    app.state.channel = await app.state.connection.channel()
-#    app.state.callback_queue = await app.state.channel.declare_queue(exclusive=True)
-#
-#    async def on_response(message: aio_pika.IncomingMessage):
-#        correlation_id = message.correlation_id
-#        future = app.state.futures.pop(correlation_id, None)
-#       if future:
-#           future.set_result(message.body.decode())
-#
-#    await app.state.callback_queue.consume(on_response)
-#   app.state.futures = {}
+@app.on_event("startup")
+async def startup():
+    app.state.connection = await aio_pika.connect_robust(RABBIT_URL)
+    app.state.channel = await app.state.connection.channel()
+    app.state.callback_queue = await app.state.channel.declare_queue(exclusive=True)
+
+    async def on_response(message: aio_pika.IncomingMessage):
+        correlation_id = message.correlation_id
+        future = app.state.futures.pop(correlation_id, None)
+        if future:
+            future.set_result(message.body.decode())
+
+    await app.state.callback_queue.consume(on_response)
+    app.state.futures = {}
 
 async def rpc_call(queue_name: str, payload: dict):
     correlation_id = str(uuid.uuid4())

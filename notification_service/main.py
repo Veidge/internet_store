@@ -27,7 +27,7 @@ async def main():
     connection = await aio_pika.connect_robust(RABBIT_URL)
     channel = await connection.channel()
     queue = await channel.declare_queue(QUEUE_NAME, durable=True)
-    print("📡 Notification service listening...")
+    print("Notification service listening...")
     await queue.consume(handle_notification)
     await asyncio.Future()
 
